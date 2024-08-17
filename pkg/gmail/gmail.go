@@ -19,9 +19,9 @@ const (
 )
 
 type Config struct {
-	Directory       string `mapstructure:"directory"`
-	CredentialsFile string `mapstructure:"credentials_file"`
-	TokenFile       string `mapstructure:"token_file"`
+	Directory       string `mapstructure:"directory" validate:"required"`
+	CredentialsFile string `mapstructure:"credentials_file" validate:"required"`
+	TokenFile       string `mapstructure:"token_file" validate:"required"`
 }
 
 func NewGmailService(ctx context.Context, gmailScope string) (*gmail.Service, error) {
