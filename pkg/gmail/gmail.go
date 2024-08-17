@@ -18,6 +18,12 @@ const (
 	tokenFile       = "token.json"
 )
 
+type Config struct {
+	Directory       string `mapstructure:"directory"`
+	CredentialsFile string `mapstructure:"credentials_file"`
+	TokenFile       string `mapstructure:"token_file"`
+}
+
 func NewGmailService(ctx context.Context, gmailScope string) (*gmail.Service, error) {
 	b, err := os.ReadFile(credentialsFile)
 	if err != nil {
