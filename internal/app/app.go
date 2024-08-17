@@ -19,7 +19,7 @@ func Run(cfg *config.Config) {
 
 	gmailClient := gmail2.NewClient(gmailService)
 
-	messageList, err := gmailClient.GetLast10MessageIDs("")
+	messageList, err := gmailClient.GetLast10MessageIDs("Route 256")
 	if err != nil {
 		log.Fatal(err)
 	}

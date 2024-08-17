@@ -4,10 +4,14 @@ import (
 	"google.golang.org/api/gmail/v1"
 	"google.golang.org/api/googleapi"
 	"route256-gmail-checker/internal/domain"
+	"strconv"
 )
 
 func (c *Client) GetLast10MessageIDs(searchQuery string) ([domain.MessagesListLen]string, error) {
-	messageListResponse, err := c.service.Users.Messages.List(c.user).Do(googleapi.QueryParameter("q", searchQuery))
+	messageListResponse, err := c.service.Users.Messages.List(c.user).Do(
+		googleapi.QueryParameter("q", searchQuery),
+		googleapi.QueryParameter("maxResults", strconv.Itoa(domain.MessagesListLen)),
+	)
 	if err != nil {
 		return [domain.MessagesListLen]string{}, err
 	}
