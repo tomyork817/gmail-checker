@@ -1,4 +1,4 @@
 [google_api]
 directory = "google_api"
-credentials_file = "credential.json"
+credentials_file = "credentials.json"
 token_file = "token.json"
