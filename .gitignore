@@ -2,3 +2,5 @@
 
 google_api/credentials.json
 google_api/token.json
+
+.env
