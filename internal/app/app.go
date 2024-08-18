@@ -5,10 +5,12 @@ import (
 	"go.uber.org/zap"
 	"log"
 	gmail2 "route256-gmail-checker/internal/infrastructure/gmail"
+	telegram2 "route256-gmail-checker/internal/infrastructure/telegram"
 	"route256-gmail-checker/internal/usecase/checker"
 	"route256-gmail-checker/pkg/config"
 	"route256-gmail-checker/pkg/gmail"
 	logger2 "route256-gmail-checker/pkg/logger"
+	"route256-gmail-checker/pkg/telegram"
 )
 
 func Run(cfg *config.Config) {
@@ -19,15 +21,27 @@ func Run(cfg *config.Config) {
 		log.Fatal(err)
 	}
 
+	logger.Info("starting application")
+
 	gmailService, err := gmail.NewGmailService(ctx, cfg.GoogleAPI)
 	if err != nil {
 		logger.Error("unable to create gmail service", zap.Error(err))
 	}
 
+	botAPI, err := telegram.NewBotAPI(cfg.Telegram)
+	if err != nil {
+		logger.Error("unable to create bot api", zap.Error(err))
+	}
+
 	gmailClient := gmail2.NewClient(gmailService)
-	telegramClient := // ...
+	telegramClient := telegram2.NewClient(botAPI)
 
 	emailChecker := checker.NewEmailChecker(gmailClient, telegramClient, cfg.Checker, logger)
 
-	go emailChecker.Start()
+	go func() {
+		err = emailChecker.Start()
+		logger.Error("stopped fetch cycle", zap.Error(err))
+	}()
+
+	logger.Info("stopping application")
 }
