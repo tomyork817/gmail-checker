@@ -11,6 +11,7 @@ import (
 	"route256-gmail-checker/pkg/gmail"
 	logger2 "route256-gmail-checker/pkg/logger"
 	"route256-gmail-checker/pkg/telegram"
+	"sync"
 )
 
 func Run(cfg *config.Config) {
@@ -38,10 +39,13 @@ func Run(cfg *config.Config) {
 
 	emailChecker := checker.NewEmailChecker(gmailClient, telegramClient, cfg.Checker, logger)
 
+	wg := sync.WaitGroup{}
 	go func() {
+		wg.Add(1)
 		err = emailChecker.Start()
 		logger.Error("stopped fetch cycle", zap.Error(err))
 	}()
 
+	wg.Wait()
 	logger.Info("stopping application")
 }

@@ -8,6 +8,7 @@ import (
 )
 
 func (c *EmailChecker) Start() error {
+	c.logger.Info("starting email checker loop")
 	for range time.Tick(c.cfg.Interval) {
 		messageList, err := c.email.GetLast10MessageIDs(c.cfg.Search)
 		if err != nil {
