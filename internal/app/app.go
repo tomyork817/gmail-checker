@@ -40,10 +40,11 @@ func Run(cfg *config.Config) {
 	emailChecker := checker.NewEmailChecker(gmailClient, telegramClient, cfg.Checker, logger)
 
 	wg := sync.WaitGroup{}
+	wg.Add(1)
 	go func() {
-		wg.Add(1)
 		err = emailChecker.Start()
 		logger.Error("stopped fetch cycle", zap.Error(err))
+		wg.Done()
 	}()
 
 	wg.Wait()

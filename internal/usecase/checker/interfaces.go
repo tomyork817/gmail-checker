@@ -3,7 +3,7 @@ package checker
 import "route256-gmail-checker/internal/domain"
 
 type Email interface {
-	GetLast10MessageIDs(searchQuery string) ([domain.MessagesListLen]string, error)
+	GetLastNMessageIDs(searchQuery string, count int) ([]string, error)
 	GetMessageByID(id string) (domain.Message, error)
 	DeleteLabelByID(messageID, labelID string) error
 }

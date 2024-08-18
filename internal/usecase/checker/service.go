@@ -14,6 +14,7 @@ type EmailChecker struct {
 
 type Config struct {
 	Interval         time.Duration `mapstructure:"interval" validate:"required" default:"1m"`
+	MessagesCount    int           `mapstructure:"messages_count" validate:"required" default:"5"`
 	Search           string        `mapstructure:"search" validate:"required" default:"-"`
 	SubjectFragments []string      `mapstructure:"subject_fragments" validate:"required" default:"[]"`
 	FromFragments    []string      `mapstructure:"from_fragments" validate:"required" default:"[]"`
