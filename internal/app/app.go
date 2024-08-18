@@ -2,44 +2,32 @@ package app
 
 import (
 	"context"
-	"fmt"
+	"go.uber.org/zap"
 	"log"
 	gmail2 "route256-gmail-checker/internal/infrastructure/gmail"
+	"route256-gmail-checker/internal/usecase/checker"
 	"route256-gmail-checker/pkg/config"
 	"route256-gmail-checker/pkg/gmail"
+	logger2 "route256-gmail-checker/pkg/logger"
 )
 
 func Run(cfg *config.Config) {
 	ctx := context.Background()
 
-	gmailService, err := gmail.NewGmailService(ctx, cfg.GoogleAPI)
+	logger, err := logger2.NewZapLogger()
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	gmailService, err := gmail.NewGmailService(ctx, cfg.GoogleAPI)
+	if err != nil {
+		logger.Error("unable to create gmail service", zap.Error(err))
 	}
 
 	gmailClient := gmail2.NewClient(gmailService)
+	telegramClient := // ...
 
-	messageList, err := gmailClient.GetLast10MessageIDs("Route 256")
-	if err != nil {
-		log.Fatal(err)
-	}
+	emailChecker := checker.NewEmailChecker(gmailClient, telegramClient, cfg.Checker, logger)
 
-	message, err := gmailClient.GetMessageByID(messageList[1])
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("%+v\n", message)
-
-	err = gmailClient.DeleteLabelByID(message.ID, "UNREAD")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	message, err = gmailClient.GetMessageByID(messageList[1])
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("%+v\n", message)
+	go emailChecker.Start()
 }

@@ -2,3 +2,10 @@
 directory = "google_api"
 credentials_file = "credentials.json"
 token_file = "token.json"
+
+[checker]
+interval = "1m"
+search = "Route 256"
+subject_fragments = ["Route 256"]
+from_fragments = ["Route 256", "Route256", "route256@ozon.ru", "route256@sender.ozon.ru"]
+snippet_fragments = ["Route 256"]

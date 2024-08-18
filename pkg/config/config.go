@@ -3,11 +3,13 @@ package config
 import (
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
+	"route256-gmail-checker/internal/usecase/checker"
 	"route256-gmail-checker/pkg/gmail"
 )
 
 type Config struct {
-	GoogleAPI gmail.Config `mapstructure:"google_api" validate:"required"`
+	GoogleAPI gmail.Config   `mapstructure:"google_api" validate:"required"`
+	Checker   checker.Config `mapstructure:"checker" validate:"required"`
 }
 
 const (
