@@ -1,1 +1,1 @@
-# route256-gmail-checker
+# gmail-checker
