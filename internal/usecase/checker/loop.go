@@ -1,8 +1,8 @@
 package checker
 
 import (
+	"gmail-checker/internal/domain"
 	"go.uber.org/zap"
-	"route256-gmail-checker/internal/domain"
 	"strings"
 	"time"
 )

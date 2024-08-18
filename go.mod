@@ -1,4 +1,4 @@
-module route256-gmail-checker
+module gmail-checker
 
 go 1.22
 

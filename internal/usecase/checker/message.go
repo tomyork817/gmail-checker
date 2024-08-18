@@ -1,6 +1,6 @@
 package checker
 
-import "route256-gmail-checker/internal/domain"
+import "gmail-checker/internal/domain"
 
 const (
 	labelIDUnread = "UNREAD"

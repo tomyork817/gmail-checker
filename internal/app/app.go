@@ -2,15 +2,15 @@ package app
 
 import (
 	"context"
+	gmail2 "gmail-checker/internal/infrastructure/gmail"
+	telegram2 "gmail-checker/internal/infrastructure/telegram"
+	"gmail-checker/internal/usecase/checker"
+	"gmail-checker/pkg/config"
+	"gmail-checker/pkg/gmail"
+	logger2 "gmail-checker/pkg/logger"
+	"gmail-checker/pkg/telegram"
 	"go.uber.org/zap"
 	"log"
-	gmail2 "route256-gmail-checker/internal/infrastructure/gmail"
-	telegram2 "route256-gmail-checker/internal/infrastructure/telegram"
-	"route256-gmail-checker/internal/usecase/checker"
-	"route256-gmail-checker/pkg/config"
-	"route256-gmail-checker/pkg/gmail"
-	logger2 "route256-gmail-checker/pkg/logger"
-	"route256-gmail-checker/pkg/telegram"
 	"sync"
 )
 

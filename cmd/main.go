@@ -1,9 +1,9 @@
 package main
 
 import (
+	"gmail-checker/internal/app"
+	"gmail-checker/pkg/config"
 	"log"
-	"route256-gmail-checker/internal/app"
-	"route256-gmail-checker/pkg/config"
 )
 
 func main() {

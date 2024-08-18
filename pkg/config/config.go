@@ -5,9 +5,9 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
-	"route256-gmail-checker/internal/usecase/checker"
-	"route256-gmail-checker/pkg/gmail"
-	"route256-gmail-checker/pkg/telegram"
+	"gmail-checker/internal/usecase/checker"
+	"gmail-checker/pkg/gmail"
+	"gmail-checker/pkg/telegram"
 )
 
 type Config struct {

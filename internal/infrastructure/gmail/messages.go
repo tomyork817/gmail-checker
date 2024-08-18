@@ -2,9 +2,9 @@ package gmail
 
 import (
 	"errors"
+	"gmail-checker/internal/domain"
 	"google.golang.org/api/gmail/v1"
 	"google.golang.org/api/googleapi"
-	"route256-gmail-checker/internal/domain"
 	"strconv"
 )
 
